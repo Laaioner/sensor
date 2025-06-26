@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 //Adicionar giroscópio e acelerômetro
     SensorManager sensorManager;
-    TextView tv;
+    TextView tv, tvAce, tvGir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         tv=findViewById(R.id.tvResultado);
+        tvAce=findViewById(R.id.tvAce);
+        tvGir=findViewById(R.id.tvGir);
         sensorManager=(SensorManager) getSystemService(Context.SENSOR_SERVICE);
         Sensor sensorLuz = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         Sensor sensorAce = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -41,14 +43,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         if (sensorEvent.sensor.getType()==Sensor.TYPE_ACCELEROMETER){
-            tv.setText(Float.toString(sensorEvent.values[1]));
+            tvAce.setText(Float.toString(sensorEvent.values[1]));
         }
 
         if (sensorEvent.sensor.getType()==Sensor.TYPE_GYROSCOPE) {
-            tv.setText(Float.toString(sensorEvent.values[2]));
+            tvGir.setText(Float.toString(sensorEvent.values[2]));
         }
     }
-
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
