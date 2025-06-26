@@ -15,7 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
-
+//Adicionar giroscópio e acelerômetro
     SensorManager sensorManager;
     TextView tv;
 
