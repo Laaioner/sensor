@@ -26,13 +26,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.activity_main);
         tv=findViewById(R.id.tvResultado);
         sensorManager=(SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-        sensorManager.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL);
+        Sensor sensorLuz = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        Sensor sensorAce = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        Sensor sensorGir = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        sensorManager.registerListener(this,sensorLuz,SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this,sensorAce,SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this,sensorGir,SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        tv.setText(Float.toString((sensorEvent.values[0])));
+        if(sensorEvent.sensor.getType()==Sensor.TYPE_LIGHT){
+            tv.setText(Float.toString((sensorEvent.values[0])));
+        }
+
+        if (sensorEvent.sensor.getType()==Sensor.TYPE_ACCELEROMETER){
+            tv.setText(Float.toString(sensorEvent.values[1]));
+        }
+
+        if (sensorEvent.sensor.getType()==Sensor.TYPE_GYROSCOPE) {
+            tv.setText(Float.toString(sensorEvent.values[2]));
+        }
     }
 
     @Override
