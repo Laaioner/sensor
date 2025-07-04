@@ -80,14 +80,14 @@ public class MainActivity extends AppCompatActivity {
     boolean track = true;
     public void showLocalizacao(double latitude, double longitude){
         GeoPoint userLocation = new GeoPoint(latitude, longitude);
+        if (track){
+            map.getController().setCenter(userLocation);
+        }
         Marker marker = new Marker(map);
         marker.setPosition(userLocation);
         marker.setTitle("Estamos aqui");
 
         map.getOverlay().clear();
-        if (track){
-            map.getController().setCenter(userLocation);
-        }
         map.getController().setZoom(18.8);
         map.getOverlays().add(marker);
         map.invalidate();
